@@ -19,6 +19,7 @@
 // import request from '@/utils/request.js'
 // 接收者永远是对象
 import { login } from '@/api/user.js'
+import {mapMutations} from 'vuex'
 
 export default {
   name: 'LoginIndex',
@@ -32,10 +33,12 @@ export default {
   },
   // 定义方法
   methods: {
+    ...mapMutations(['setUser'])//相当于在mapMutations方法中有一个同名状态
     async handleLogin () {
       try {
         const data = await login(this.user)
         console.log(data)
+        this.setUser(data)
       } catch (error) {
         console.log(error)
       }
